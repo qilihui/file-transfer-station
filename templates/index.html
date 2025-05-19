@@ -250,6 +250,7 @@
                 <tr>
                     <th>文件名</th>
                     <th>上传时间</th>
+                    <th>文件大小</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -259,6 +260,7 @@
                 <tr>
                     <td>{{ file.name }}</td>
                     <td>{{ file.upload_time }}</td>
+                    <td>{{ file.size }}</td>
                     <td>
                         <a href="/download/{{ file.name }}" class="action-btn download-btn">下载</a>
                         <a href="/delete/{{ file.name }}" class="action-btn delete-btn">删除</a>

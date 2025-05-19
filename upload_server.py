@@ -13,10 +13,20 @@ def index():
     for filename in os.listdir(UPLOAD_FOLDER):
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         ctime = datetime.fromtimestamp(os.path.getctime(filepath))
+        size = os.path.getsize(filepath)  # 获取文件大小(字节)
+        # 转换为更友好的格式(KB/MB)
+        if size < 1024:
+            size_str = f"{size} B"
+        elif size < 1024 * 1024:
+            size_str = f"{size/1024:.2f} KB"
+        else:
+            size_str = f"{size/(1024*1024):.2f} MB"
         files.append({
             'name': filename,
             'upload_time': ctime.strftime('%Y-%m-%d %H:%M:%S'),
-            'timestamp': ctime.timestamp()
+            'timestamp': ctime.timestamp(),
+            'size': size_str,
+            'raw_size': size
         })
     # 按上传时间降序排序
     files.sort(key=lambda x: x['timestamp'], reverse=True)
